@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAISA Project 🤖✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pink: #ff6b9d;
+            --blue: #4dabf7;
+            --yellow: #ffd43b;
+            --purple: #9775fa;
+            --green: #51cf66;
+            --orange: #ff922b;
+            --bg: #fff5f7;
+            --text: #2d3748;
+            --card-1: #fff;
+            --card-2: #fffbeb;
+            --card-3: #f0f9ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background: var(--bg);
+            overflow-x: hidden;
+        }
+
+        /* Fun background blobs */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -200px;
+            right: -200px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--pink) 0%, transparent 70%);
+            opacity: 0.15;
+            animation: blob1 8s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -150px;
+            left: -150px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--blue) 0%, transparent 70%);
+            opacity: 0.15;
+            animation: blob2 10s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes blob1 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        @keyframes blob2 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-30px, 30px) scale(1.1); }
+            66% { transform: translate(20px, -20px) scale(0.9); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 600;
+            font-size: 2rem;
+            background: linear-gradient(135deg, var(--pink), var(--purple), var(--blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 1px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1.2rem;
+            border-radius: 25px;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            background: linear-gradient(135deg, var(--yellow), var(--orange));
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 146, 43, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #ffd1e8 0%, #b5e8ff 50%, #fff9c4 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Fun shapes in hero */
+        .shape {
+            position: absolute;
+            opacity: 0.6;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape-1 {
+            top: 10%;
+            left: 5%;
+            font-size: 4rem;
+            animation-delay: 0s;
+        }
+
+        .shape-2 {
+            top: 60%;
+            right: 10%;
+            font-size: 3rem;
+            animation-delay: 1s;
+        }
+
+        .shape-3 {
+            bottom: 20%;
+            left: 15%;
+            font-size: 3.5rem;
+            animation-delay: 2s;
+        }
+
+        .shape-4 {
+            top: 30%;
+            right: 20%;
+            font-size: 2.5rem;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--pink), var(--purple), var(--blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.6rem;
+            color: var(--text);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .hero .institution {
+            font-size: 1.1rem;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .hero .badges {
+            margin-top: 2.5rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            background: white;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+        }
+
+        .badge:nth-child(1) { border-color: var(--pink); }
+        .badge:nth-child(2) { border-color: var(--blue); }
+        .badge:nth-child(3) { border-color: var(--purple); }
+        .badge:nth-child(4) { border-color: var(--yellow); }
+
+        .badge:hover {
+            transform: scale(1.1) rotate(-2deg);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        section {
+            margin-bottom: 6rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--pink), var(--purple), var(--blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        /* Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 25px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 4px solid;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, var(--pink), var(--purple), var(--blue));
+        }
+
+        .card:nth-child(1) { border-color: var(--pink); }
+        .card:nth-child(2) { border-color: var(--blue); }
+        .card:nth-child(3) { border-color: var(--yellow); }
+
+        .card:hover {
+            transform: translateY(-10px) rotate(1deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .card h3 {
+            font-family: 'Fredoka', sans-serif;
+            color: var(--text);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .card p, .card ul {
+            color: #64748b;
+            line-height: 1.8;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .card li::before {
+            content: '✨';
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+        }
+
+        /* Research Questions */
+        .rq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .rq-item {
+            background: white;
+            border-radius: 25px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-left: 8px solid;
+            transition: all 0.3s ease;
+        }
+
+        .rq-item:nth-child(1) { border-color: var(--pink); }
+        .rq-item:nth-child(2) { border-color: var(--blue); }
+        .rq-item:nth-child(3) { border-color: var(--green); }
+
+        .rq-item:hover {
+            transform: translateX(15px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .rq-number {
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--pink);
+        }
+
+        .rq-text {
+            color: var(--text);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Status Section */
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .status-card {
+            background: white;
+            border-radius: 25px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 4px solid;
+            transition: all 0.3s ease;
+        }
+
+        .status-card:nth-child(1) { border-color: var(--orange); }
+        .status-card:nth-child(2) { border-color: var(--purple); }
+
+        .status-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .status-card h3 {
+            font-family: 'Fredoka', sans-serif;
+            color: var(--text);
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .status-list {
+            list-style: none;
+        }
+
+        .status-list li {
+            padding: 1rem 0;
+            padding-left: 2.5rem;
+            position: relative;
+            color: var(--text);
+            border-bottom: 2px solid #f1f5f9;
+            transition: all 0.3s ease;
+        }
+
+        .status-list li:last-child {
+            border-bottom: none;
+        }
+
+        .status-list li:hover {
+            padding-left: 3rem;
+            color: var(--purple);
+        }
+
+        .status-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            font-size: 1.5rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .status-card:nth-child(1) .status-list li::before {
+            color: var(--orange);
+        }
+
+        .status-card:nth-child(2) .status-list li::before {
+            color: var(--purple);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--pink), var(--purple), var(--blue));
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        footer p {
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        footer .emoji-line {
+            margin-top: 1.5rem;
+            font-size: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .section-header h2 {
+                font-size: 2.5rem;
+            }
+
+            .cards-grid,
+            .status-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .badge {
+                font-size: 0.9rem;
+                padding: 0.6rem 1.2rem;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        ::selection {
+            background: var(--pink);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <div class="logo">MAISA 🤖</div>
+            <ul class="nav-links">
+                <li><a href="#mission">Mission</a></li>
+                <li><a href="#current">Current Work</a></li>
+                <li><a href="#completed">Completed</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="shape shape-1">🎯</div>
+        <div class="shape shape-2">💡</div>
+        <div class="shape shape-3">⚡</div>
+        <div class="shape shape-4">✨</div>
+        
+        <div class="hero-content">
+            <h1>MAISA</h1>
+            <p class="subtitle">Managed AI-Powered SoftwAre Innovations 🚀</p>
+            <p class="institution">LUT University • Business Finland Co-Innovation Project</p>
+            <div class="badges">
+                <div class="badge">🤖 AI Research</div>
+                <div class="badge">💻 Software Engineering</div>
+                <div class="badge">🧠 Hybrid Intelligence</div>
+                <div class="badge">💰 €500K Project</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <section id="mission">
+            <div class="section-header">
+                <h2>Our Mission 🎯</h2>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>🎯 Project Overview</h3>
+                    <p>We're building the future of human-AI collaboration in software engineering! Creating frameworks and standards that make developers and AI work together like best buds 🤝</p>
+                </div>
+
+                <div class="card">
+                    <h3>🔥 What We're Working On</h3>
+                    <ul>
+                        <li>Human-AI collaboration protocols</li>
+                        <li>AI governance frameworks</li>
+                        <li>Training and skills development</li>
+                        <li>Decision-making optimization</li>
+                        <li>Business model innovation</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>📈 The Impact</h3>
+                    <p>We're aiming for 30-40% efficiency gains in software development! That's huge! Bridging research with real-world application to make AI integration actually work 💪</p>
+                </div>
+            </div>
+
+            <div class="section-header" style="margin-top: 5rem;">
+                <h2>🤔 Research Questions</h2>
+            </div>
+
+            <div class="rq-list">
+                <div class="rq-item">
+                    <div class="rq-number">💡 RQ1 & RQ2</div>
+                    <div class="rq-text">What frameworks do we need for effective human-AI collab, and how can we adapt them to different environments?</div>
+                </div>
+
+                <div class="rq-item">
+                    <div class="rq-number">💡 RQ3 & RQ4</div>
+                    <div class="rq-text">What's the best way to use AI in software decisions, and how do we automate tasks while keeping things accurate and ethical?</div>
+                </div>
+
+                <div class="rq-item">
+                    <div class="rq-number">💡 RQ5 & RQ6</div>
+                    <div class="rq-text">How do we train engineers to work with AI tools, and how can we keep improving these training methods?</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="current">
+            <div class="section-header">
+                <h2>What We're Up To ⚡</h2>
+            </div>
+
+            <div class="status-grid">
+                <div class="status-card">
+                    <h3>🔬 Active Research</h3>
+                    <ul class="status-list">
+                        <li>Teaming up with partner companies 🤝</li>
+                        <li>Building an onboarding assistant 🤖</li>
+                        <li>Analyzing our pilot study results (55 people!) 📊</li>
+                        <li>Deep diving into collaboration protocols 📚</li>
+                    </ul>
+                </div>
+
+                <div class="status-card">
+                    <h3>✨ What We've Found</h3>
+                    <ul class="status-list">
+                        <li>Found the 4 top collaboration protocols 🎯</li>
+                        <li>Getting cool insights from companies 💡</li>
+                        <li>Framework is coming together 🏗️</li>
+                        <li>Testing our metrics 📈</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="completed">
+            <div class="section-header">
+                <h2>What We've Done ✅</h2>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>🔬 Preliminary Research</h3>
+                    <p>Got our foundation solid! Did comprehensive research on human-AI collaboration to figure out what we need to focus on 📖</p>
+                </div>
+
+                <div class="card">
+                    <h3>🧪 Pilot Study</h3>
+                    <p>Ran a study with 55 participants! Got some really interesting data on how humans and AI can work together better 🎉</p>
+                </div>
+
+                <div class="card">
+                    <h3>📋 Protocol Analysis</h3>
+                    <p>Found and documented the 4 most used collaboration protocols in the industry. Knowledge unlocked! 🔓</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>MAISA Project • LUT University • 2025-2026</p>
+        <p style="font-size: 1rem; opacity: 0.9;">Business Finland Co-Innovation Project</p>
+        <p class="emoji-line">🤖 + 👥 = 🚀</p>
+    </footer>
+</body>
+</html>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background: var(--bg);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 50% 20%, rgba(245, 158, 11, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+            animation: slideDown 0.6s ease-out;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            position: relative;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                filter: drop-shadow(0 0 5px var(--glow));
+            }
+            50% {
+                filter: drop-shadow(0 0 15px var(--glow));
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 8px;
+            padding: 2px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a:hover::before {
+            opacity: 1;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 8rem 2rem 6rem;
+            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(45deg, transparent 30%, rgba(99, 102, 241, 0.1) 50%, transparent 70%),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 50px,
+                    rgba(255, 255, 255, 0.03) 50px,
+                    rgba(255, 255, 255, 0.03) 51px
+                );
+            pointer-events: none;
+            animation: slideBackground 20s linear infinite;
+        }
+
+        @keyframes slideBackground {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(100px);
+            }
+        }
+
+        .hero::after {
+            content: '🤖';
+            position: absolute;
+            top: 20%;
+            right: 10%;
+            font-size: 15rem;
+            opacity: 0.05;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(-5deg);
+            }
+            50% {
+                transform: translateY(-30px) rotate(5deg);
+            }
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 0.8s ease-out 0.3s both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            filter: drop-shadow(0 0 30px rgba(165, 180, 252, 0.5));
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            opacity: 0.95;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: #e0e7ff;
+        }
+
+        .hero .institution {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            opacity: 0.8;
+            letter-spacing: 1px;
+            color: #c7d2fe;
+        }
+
+        .hero .badges {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .badge:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        section {
+            margin-bottom: 6rem;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .section-header {
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-header h2 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            border-radius: 2px;
+            box-shadow: 0 0 10px var(--glow);
+        }
+
+        .section-header .underline {
+            display: none;
+        }
+
+        /* Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 32px var(--shadow);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(99, 102, 241, 0.3);
+            background: var(--card-hover);
+            border-color: var(--primary);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card h3 {
+            font-family: 'JetBrains Mono', monospace;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.2rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .card h3::before {
+            content: '▸ ';
+            color: var(--accent);
+            margin-right: 0.5rem;
+        }
+
+        .card p, .card ul {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        /* Research Questions */
+        .rq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .rq-item {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 32px var(--shadow);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rq-item::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            border-radius: 20px;
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.4s ease;
+        }
+
+        .rq-item:hover {
+            transform: translateX(15px) scale(1.02);
+            box-shadow: 0 12px 48px rgba(139, 92, 246, 0.4);
+        }
+
+        .rq-item:hover::before {
+            opacity: 1;
+        }
+
+        .rq-number {
+            font-family: 'JetBrains Mono', monospace;
+            background: linear-gradient(135deg, var(--accent), #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.5));
+        }
+
+        .rq-number::before {
+            content: '💡 ';
+        }
+
+        .rq-text {
+            color: var(--text);
+            font-weight: 500;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        /* Status Section */
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .status-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 8px 32px var(--shadow);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            transition: all 0.4s ease;
+        }
+
+        .status-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--success), var(--primary), var(--secondary));
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .status-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 48px rgba(99, 102, 241, 0.3);
+            border-color: var(--primary);
+        }
+
+        .status-card h3 {
+            font-family: 'JetBrains Mono', monospace;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+            font-size: 1.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .status-card h3::before {
+            content: '⚡ ';
+            background: linear-gradient(135deg, var(--accent), #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .status-list {
+            list-style: none;
+        }
+
+        .status-list li {
+            padding: 1rem 0;
+            padding-left: 2.5rem;
+            position: relative;
+            color: var(--text);
+            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .status-list li:last-child {
+            border-bottom: none;
+        }
+
+        .status-list li:hover {
+            padding-left: 3rem;
+            color: var(--primary);
+        }
+
+        .status-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .status-list li:hover::before {
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), var(--secondary), var(--accent), transparent);
+        }
+
+        footer p {
+            opacity: 0.95;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+
+        footer p:first-child {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        footer .emoji-line {
+            margin-top: 1.5rem;
+            font-size: 1.5rem;
+            opacity: 0.7;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+                letter-spacing: 2px;
+            }
+
+            .hero {
+                padding: 6rem 1.5rem 4rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+                letter-spacing: 3px;
+            }
+
+            .hero .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .hero .badges {
+                gap: 0.5rem;
+            }
+
+            .badge {
+                font-size: 0.8rem;
+                padding: 0.5rem 1rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .cards-grid,
+            .status-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card, .status-card, .rq-item {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Selection color */
+        ::selection {
+            background: var(--primary);
+            color: white;
+        }
+
+        ::-moz-selection {
+            background: var(--primary);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <div class="logo">MAISA 🤖</div>
+            <ul class="nav-links">
+                <li><a href="#mission">Mission</a></li>
+                <li><a href="#current">Current Work</a></li>
+                <li><a href="#completed">Completed</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>MAISA</h1>
+            <p class="subtitle">Managed AI-Powered SoftwAre Innovations 🚀</p>
+            <p class="institution">LUT University • Business Finland Co-Innovation Project</p>
+            <div class="badges">
+                <div class="badge">🤖 AI Research</div>
+                <div class="badge">💻 Software Engineering</div>
+                <div class="badge">🧠 Hybrid Intelligence</div>
+                <div class="badge">💰 €500K Project</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Mission Section -->
+        <section id="mission">
+            <div class="section-header">
+                <h2>Our Mission 🎯</h2>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>🎯 Project Overview</h3>
+                    <p>MAISA focuses on developing frameworks and standards for effective human-AI collaboration in software engineering. We aim to establish hybrid intelligent software engineering practices that optimize decision-making, automate routine tasks, and enhance overall efficiency. It's giving innovation era vibes! 💯</p>
+                </div>
+
+                <div class="card">
+                    <h3>🔥 Key Focus Areas</h3>
+                    <ul>
+                        <li>Human-AI collaboration protocols</li>
+                        <li>AI governance frameworks</li>
+                        <li>Training and skills development</li>
+                        <li>Decision-making optimization</li>
+                        <li>Business model innovation</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>📈 Expected Impact</h3>
+                    <p>Target resource savings of 30-40% in software development through transformative integration of AI. Bridging theoretical research with practical application to redefine software engineering practices for the AI era. No cap! 🚀</p>
+                </div>
+            </div>
+
+            <div class="section-header" style="margin-top: 4rem;">
+                <h3 style="font-family: 'JetBrains Mono', monospace; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-size: 2rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">🤔 Research Questions</h3>
+            </div>
+
+            <div class="rq-list">
+                <div class="rq-item">
+                    <div class="rq-number">RQ1 & RQ2</div>
+                    <div class="rq-text">What frameworks or standards are needed to facilitate effective human-AI collaboration in software engineering, and how can these frameworks be adapted to different environments and project needs?</div>
+                </div>
+
+                <div class="rq-item">
+                    <div class="rq-number">RQ3 & RQ4</div>
+                    <div class="rq-text">What are the most effective strategies for using AI in software engineering decision-making, and how can AI be integrated to automate routine tasks while ensuring accuracy, efficiency, and ethical standards?</div>
+                </div>
+
+                <div class="rq-item">
+                    <div class="rq-number">RQ5 & RQ6</div>
+                    <div class="rq-text">What training methods are most effective for equipping software engineers with skills for AI collaboration, and how can these methods be evaluated and improved for evolving AI-enhanced environments?</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Current Work Section -->
+        <section id="current">
+            <div class="section-header">
+                <h2>Current Work ⚡</h2>
+            </div>
+
+            <div class="status-grid">
+                <div class="status-card">
+                    <h3>Active Research</h3>
+                    <ul class="status-list">
+                        <li>Establishing collaboration with involved companies 🤝</li>
+                        <li>Developing onboarding assistant for Work Package 1 🔧</li>
+                        <li>Analyzing results from pilot study (n=55) 📊</li>
+                        <li>Literature review of collaboration protocols 📚</li>
+                    </ul>
+                </div>
+
+                <div class="status-card">
+                    <h3>Key Findings</h3>
+                    <ul class="status-list">
+                        <li>Identified 4 most used collaboration protocols ✨</li>
+                        <li>Initial insights from company partnerships 💡</li>
+                        <li>Framework development in progress 🏗️</li>
+                        <li>Metrics validation underway 📈</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Completed Section -->
+        <section id="completed">
+            <div class="section-header">
+                <h2>Completed Work ✅</h2>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>🔬 Preliminary Research</h3>
+                    <p>Conducted comprehensive preliminary research on human-AI collaboration in software engineering contexts, establishing theoretical foundations and identifying key areas for investigation. Based research! 📖</p>
+                </div>
+
+                <div class="card">
+                    <h3>🧪 Pilot Study</h3>
+                    <p>Successfully completed pilot study on collaboration protocols with 55 participants, providing initial empirical data on effective human-AI interaction patterns in software development. Data looking good! 📊</p>
+                </div>
+
+                <div class="card">
+                    <h3>📋 Protocol Analysis</h3>
+                    <p>Systematic literature review completed, identifying and documenting the four most commonly used collaboration protocols in current industry practice. Protocols acquired! 🎯</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>MAISA Project • LUT University • 2025-2026</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Business Finland Co-Innovation Project</p>
+        <p class="emoji-line">🤖 × 👥 = 🚀</p>
+    </footer>
+</body>
+</html>
